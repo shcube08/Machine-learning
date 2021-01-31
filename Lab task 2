@@ -1,0 +1,24 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+X=[1,2,3]
+Y=[1.2,1.9,3.2]
+
+def max_likelihood_best_fit(X,Y):
+    A=np.sum(Y)
+    B=np.sum(X)
+    N=len(X)
+    C=np.dot(X,Y)
+    D=np.dot(X,X)
+   
+    w1 = (C*N - A*B) / (N*D - B*B)
+    w0 = (A-B*w1) / N 
+    return [w0,w1]
+
+
+w0,w1= max_likelihood_best_fit(X,Y)
+y_points=[]
+for i in range(len(X)):
+    y_points.append(w0+w1*X[i])
+  plt.scatter(X,Y)
+  plt.plot(X,y_points)
